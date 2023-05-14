@@ -1,19 +1,18 @@
 const express = require('express')
 const app = express();
 
-app.use(express.json())
+const cookieParser = require('cookie-parser')
 
-const session = require('express-session')
-app.use(session({
-    secret:"efbwefnkjanfnkjn6jn3jn6n",
-    resave: false,
-    saveUninitialized: true  
-}))
+app.use(express.json())
+app.use(cookieParser())
 
 const product = require('./routes/productRoute')
 app.use('/api/v1',product)
 
 const user = require('./routes/userRoutes')
 app.use('/api/v1',user)
+
+const order = require('./routes/orderRoute')
+app.use('/api/v1',order)
 
 module.exports = app;
